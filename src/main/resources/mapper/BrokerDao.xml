@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mamba.houses.dao.BrokerDao">
+    <select id="all" parameterType="com.mamba.houses.vo.search.SearchBrokerVO" resultType="com.mamba.houses.po.BrokerPO">
+        select * from broker
+    </select>
+
+    <select id="findBrokerByUuid" parameterType="java.lang.String" resultType="com.mamba.houses.po.BrokerPO">
+        select * from broker where uuid=#{uuid} limit 1
+    </select>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from broker where uuid = #{uuid}
+    </delete>
+
+    <insert id="create" parameterType="com.mamba.houses.po.BrokerPO">
+        insert into broker(
+        uuid, `name`,gender, status, phone, `desc`, createTime, updateTime
+        )
+        values
+        (#{uuid}, #{name}, #{gender}, #{status}, #{phone}, #{desc}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="update" parameterType="com.mamba.houses.po.BrokerPO">
+        update
+        broker
+        set name=#{name}, gender=#{gender}, status=#{gender}, phone=#{phone}, `desc`=#{desc}, updateTime=#{updateTime}
+        where uuid = #{uuid}
+    </update>
+</mapper>
